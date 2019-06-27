@@ -1,0 +1,21 @@
+#ansible playbook to launch instance.
+#requirements: pip needs to be installed, Boto module(install using pip),install awscli
+
+---
+  - name: Launching ec2 instance
+    hosts: localhost
+    tasks:
+      - pip:                                          #not necessary to mention here, in case if boto is not detected, it helps.
+          name: boto
+      - name: Launching Aws instance
+        ec2:
+          key_name:                                   #give your keyname
+          region: ap-south-1 
+          instance_type: t2.micro
+          image: ami-5b673c34                         #give desired image, I have given rhel 7.5 image
+         # group: ansible
+          vpc_subnet_id: subnet-1246187a              #optional
+          assign_public_ip: yes
+          count: 1                                      #number of instance
+          aws_access_key:                             #can give both keys here or can also configure in awsconfigure .
+          aws_secret_key:                             #These keys are found in security credentials section
