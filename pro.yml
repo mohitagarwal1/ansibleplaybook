@@ -1,0 +1,8 @@
+#ansible playbook to install any software.
+---
+ - hosts: localhost #target section
+   tasks:
+    - name: running whoami command
+      command: whoami
+    - name: installing httpd soft                 #here I'm installing httpd software
+      yum: name=httpd state=installed             
